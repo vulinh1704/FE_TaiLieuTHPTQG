@@ -35,12 +35,11 @@ function login() {
         password: password
     }
     axios.post("http://localhost:3000/users/login", user).then(({data}) => {
-        alert("Đăng nhập thành công!")
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("auth", JSON.stringify(data));
+        showMain();
+        router();
     }).catch(({response}) => {
         document.getElementById("error-sign-up").innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ' + response.data.message;
     })
 }
 
-// showFormAuth();
-// showFormLogin();

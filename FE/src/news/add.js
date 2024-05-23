@@ -96,10 +96,14 @@ function showFormAdd() {
 }
 
 function handleNext() {
-    new FroalaEditor('#details', {
+    editor = new FroalaEditor('#details', {
         attribution: false,
         height: 200,
-        placeholderText: "Write news ..."
+        placeholderText: "Write news ...",
+        html: localStorage.getItem("contentNew") || ""
+    }, function () {
+        console.log(localStorage.getItem("contentNew") || "")
+        editor.html.set(localStorage.getItem("contentNew") || "");
     });
     document.getElementById("left").style.opacity = 0;
     document.getElementById("left").style.display = "none";
@@ -124,7 +128,7 @@ function add() {
     let title = document.getElementById("title").value;
     let contentDemo = document.getElementById("contentDemo").value;
     let content = editor.html.get();
-    let image = localStorage.getItem("avatar-news");
+    let image = document.getElementById("avatar-news").src;
     let timeAt = new Date();
     let author = document.getElementById("author").value;
     let post = {
@@ -135,9 +139,8 @@ function add() {
         timeAt: timeAt,
         author: author
     }
-    console.log(post)
     axios.post("http://localhost:3000/news", post).then(() => {
         alert("Add Success")
-        router("list-news")
+        router('post/list-news')
     })
 }
