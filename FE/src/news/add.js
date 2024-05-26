@@ -100,7 +100,19 @@ function handleNext() {
         attribution: false,
         height: 200,
         placeholderText: "Write news ...",
-        html: localStorage.getItem("contentNew") || ""
+        html: localStorage.getItem("contentNew") || "",
+        imageUploadURL: 'false',
+        events: {
+            'image.beforeUpload': function (images) {
+                console.log(images);
+                if (images.length > 0 && images[0]) {
+                    uploadImageCustom(images[0]);
+                } else {
+                    console.error("No image file is available for upload.");
+                }
+                return false;
+            }
+        }
     }, function () {
         console.log(localStorage.getItem("contentNew") || "")
         editor.html.set(localStorage.getItem("contentNew") || "");

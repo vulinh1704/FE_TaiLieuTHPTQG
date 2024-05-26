@@ -81,21 +81,21 @@ function showSidebarAdmin() {
                         </li>
 
                         
-                        <li>
-                            <a href="#extra-pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line iq-arrow-left"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="extra-pages" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a href="pages-timeline.html"><i class="ri-map-pin-time-line"></i>Timeline</a></li>
-                                <li><a href="pages-invoice.html"><i class="ri-question-answer-line"></i>Invoice</a></li>
-                                <li><a href="blank-page.html"><i class="ri-invision-line"></i>Blank Page</a></li>
-                                <li><a href="pages-error.html"><i class="ri-error-warning-line"></i>Error 404</a></li>
-                                <li><a href="pages-error-500.html"><i class="ri-error-warning-line"></i>Error 500</a></li>
-                                <li><a href="pages-pricing.html"><i class="ri-price-tag-line"></i>Pricing</a></li>
-                                <li><a href="pages-pricing-one.html"><i class="ri-price-tag-2-line"></i>Pricing 1</a></li>
-                                <li><a href="pages-maintenance.html"><i class="ri-archive-line"></i>Maintenance</a></li>
-                                <li><a href="pages-comingsoon.html"><i class="ri-mastercard-line"></i>Coming Soon</a></li>
-                                <li><a href="pages-faq.html"><i class="ri-compasses-line"></i>Faq</a></li>
-                            </ul>
-                        </li>
+<!--                        <li>-->
+<!--                            <a href="#extra-pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line iq-arrow-left"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>-->
+<!--                            <ul id="extra-pages" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">-->
+<!--                                <li><a href="pages-timeline.html"><i class="ri-map-pin-time-line"></i>Timeline</a></li>-->
+<!--                                <li><a href="pages-invoice.html"><i class="ri-question-answer-line"></i>Invoice</a></li>-->
+<!--                                <li><a href="blank-page.html"><i class="ri-invision-line"></i>Blank Page</a></li>-->
+<!--                                <li><a href="pages-error.html"><i class="ri-error-warning-line"></i>Error 404</a></li>-->
+<!--                                <li><a href="pages-error-500.html"><i class="ri-error-warning-line"></i>Error 500</a></li>-->
+<!--                                <li><a href="pages-pricing.html"><i class="ri-price-tag-line"></i>Pricing</a></li>-->
+<!--                                <li><a href="pages-pricing-one.html"><i class="ri-price-tag-2-line"></i>Pricing 1</a></li>-->
+<!--                                <li><a href="pages-maintenance.html"><i class="ri-archive-line"></i>Maintenance</a></li>-->
+<!--                                <li><a href="pages-comingsoon.html"><i class="ri-mastercard-line"></i>Coming Soon</a></li>-->
+<!--                                <li><a href="pages-faq.html"><i class="ri-compasses-line"></i>Faq</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
                         <li id="exam">
                             <a href="#menu-level" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="fa-regular fa-file-lines iq-arrow-left"></i><span>Exam</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="menu-level" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -203,66 +203,66 @@ async function showNavbar() {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto navbar-list">
                             <li class="nav-item nav-icon">
-                                <a href="#" class="search-toggle iq-waves-effect bg-primary rounded">
-                                    <i class="ri-notification-line"></i>
-                                    <span class="bg-danger dots"></span>
-                                </a>
+<!--                                <a href="#" class="search-toggle iq-waves-effect bg-primary rounded">-->
+<!--                                    <i class="ri-notification-line"></i>-->
+<!--                                    <span class="bg-danger dots"></span>-->
+<!--                                </a>-->
                                 <div class="iq-sub-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                        <div class="iq-card-body p-0 ">
-                                            <div class="bg-primary p-3">
-                                                <h5 class="mb-0 text-white">All Notifications<small class="badge  badge-light float-right pt-1">4</small></h5>
-                                            </div>
-                                            <a href="#" class="iq-sub-card" >
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="images/user/01.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Emma Watson Barry</h6>
-                                                        <small class="float-right font-size-12">Just Now</small>
-                                                        <p class="mb-0">95 MB</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card" >
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="images/user/02.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">New customer is join</h6>
-                                                        <small class="float-right font-size-12">5 days ago</small>
-                                                        <p class="mb-0">Cyst Barry</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card" >
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="images/user/03.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Two customer is left</h6>
-                                                        <small class="float-right font-size-12">2 days ago</small>
-                                                        <p class="mb-0">Cyst Barry</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card" >
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="images/user/04.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                                        <small class="float-right font-size-12">3 days ago</small>
-                                                        <p class="mb-0">Cyst Barry</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+<!--                                    <div class="iq-card shadow-none m-0">-->
+<!--                                        <div class="iq-card-body p-0 ">-->
+<!--                                            <div class="bg-primary p-3">-->
+<!--                                                <h5 class="mb-0 text-white">All Notifications<small class="badge  badge-light float-right pt-1">4</small></h5>-->
+<!--                                            </div>-->
+<!--                                            <a href="#" class="iq-sub-card" >-->
+<!--                                                <div class="media align-items-center">-->
+<!--                                                    <div class="">-->
+<!--                                                        <img class="avatar-40 rounded" src="images/user/01.jpg" alt="">-->
+<!--                                                    </div>-->
+<!--                                                    <div class="media-body ml-3">-->
+<!--                                                        <h6 class="mb-0 ">Emma Watson Barry</h6>-->
+<!--                                                        <small class="float-right font-size-12">Just Now</small>-->
+<!--                                                        <p class="mb-0">95 MB</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <a href="#" class="iq-sub-card" >-->
+<!--                                                <div class="media align-items-center">-->
+<!--                                                    <div class="">-->
+<!--                                                        <img class="avatar-40 rounded" src="images/user/02.jpg" alt="">-->
+<!--                                                    </div>-->
+<!--                                                    <div class="media-body ml-3">-->
+<!--                                                        <h6 class="mb-0 ">New customer is join</h6>-->
+<!--                                                        <small class="float-right font-size-12">5 days ago</small>-->
+<!--                                                        <p class="mb-0">Cyst Barry</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <a href="#" class="iq-sub-card" >-->
+<!--                                                <div class="media align-items-center">-->
+<!--                                                    <div class="">-->
+<!--                                                        <img class="avatar-40 rounded" src="images/user/03.jpg" alt="">-->
+<!--                                                    </div>-->
+<!--                                                    <div class="media-body ml-3">-->
+<!--                                                        <h6 class="mb-0 ">Two customer is left</h6>-->
+<!--                                                        <small class="float-right font-size-12">2 days ago</small>-->
+<!--                                                        <p class="mb-0">Cyst Barry</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <a href="#" class="iq-sub-card" >-->
+<!--                                                <div class="media align-items-center">-->
+<!--                                                    <div class="">-->
+<!--                                                        <img class="avatar-40 rounded" src="images/user/04.jpg" alt="">-->
+<!--                                                    </div>-->
+<!--                                                    <div class="media-body ml-3">-->
+<!--                                                        <h6 class="mb-0 ">New Mail from Fenny</h6>-->
+<!--                                                        <small class="float-right font-size-12">3 days ago</small>-->
+<!--                                                        <p class="mb-0">Cyst Barry</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </div>
                             </li>
                         </ul>
