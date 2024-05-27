@@ -42,10 +42,13 @@ function showDetail(id) {
 }
 
 function remove(id) {
-    axios.delete("http://localhost:3000/news/" + id).then(() => {
-        document.getElementById("close").click()
-        showAll();
-    })
+    let isConfirm = confirm("Bạn có chắc chắn xóa bài viết này ?")
+    if(isConfirm) {
+        axios.delete("http://localhost:3000/news/" + id).then(() => {
+            document.getElementById("close").click()
+            showAll();
+        })
+    }
 }
 
 function showDetailInUser(id) {

@@ -30,7 +30,7 @@ async function showCompleteExam(idCurrentExam = localStorage.getItem("idCurrentE
                      <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
-                              <h4 class="card-title ml-3" id="timer" style="color: #1e3d73">00:00</h4>
+                              <h4 class="card-title ml-3">Time remaining ( <span id="timer" style="color: #1e3d73">00:00</span> )</h4>
                            </div>
                         </div>
                         <div class="iq-card-body">
@@ -64,13 +64,16 @@ async function showCompleteExam(idCurrentExam = localStorage.getItem("idCurrentE
          <fieldset id="questions-${i}" style="display: none; opacity: 0">
              <div class="form-card text-left" id="question-${i}">
               <div class="ml-2" style="width: 90%"><h5 class="card-title"><span style="font-weight: 800">Task ${i + 1}:</span> ${exam.questions[i].content}</h5></div>
+              <div id="div-question-${i}"></div>
              <div id="answers-${i}"></div>
          </fieldset>`;
         let newDiv = document.createElement("div");
         newDiv.innerHTML = htmlInner;
         let questionDiv = document.getElementById("form-wizard3");
         questionDiv.appendChild(newDiv);
-
+        if(exam.questions[i].image) {
+            document.getElementById(`div-question-${i}`).innerHTML = `<img style="width: 200px; height: 200px" src="${exam.questions[i].image}"/>`
+        }
         let htmlAnswers = ``;
         for (let j = 0; j < exam.questions[i].answers.length; j++) {
             if (exam.questions[i].type.id === 2) {
@@ -215,23 +218,25 @@ async function handleSubmit(idCurrentExam) {
         }
     });
     const totalScore = ((Object.values(scores).filter(value => value).length) / Object.keys(scores).length).toFixed(2) * 10 || 0;
-    axios.post("http://localhost:3000/resultAnswers", resultAnswers).then(() => {
+    await axios.post("http://localhost:3000/resultAnswers", resultAnswers).then(async () => {
         let dataToken = JSON.parse(localStorage.getItem("auth"));
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${dataToken.token}`
         };
-        axios.get("http://localhost:3000/resultExams/" + localStorage.getItem("idResultExam"), {headers}).then(({data}) => {
+        await axios.get("http://localhost:3000/resultExams/" + localStorage.getItem("idResultExam"), {headers}).then(async ({data}) => {
             delete data.question;
             delete data.exam;
             delete data.resultAnswers;
             data.score = totalScore;
-            axios.post("http://localhost:3000/resultExams", data, {headers}).then(() => {
+            await axios.post("http://localhost:3000/resultExams", data, {headers}).then(() => {
                 clearInterval(cd);
+                alert("Bài thi đã đươc nộp!")
                 router('exam/result-exam');
             });
         });
     });
+    return true;
 }
 
 
@@ -276,7 +281,7 @@ function startTimer(duration, display) {
         localStorage.removeItem('endTime'); // Xóa endTime
         display.textContent = "00:00";
         handleSubmit(localStorage.getItem("idCurrentExam")).then(() => {
-            router('exam/list-exam');
+            // router('exam/list-exam');
         });
         return;
     }
@@ -284,21 +289,19 @@ function startTimer(duration, display) {
     let minutes, seconds;
     let countdown = setInterval(function () {
         if (timer < 0) {
-            clearInterval(countdown);
-            localStorage.removeItem('endTime');
-            display.textContent = "00:00";
             handleSubmit(localStorage.getItem("idCurrentExam")).then(() => {
-                router('exam/list-exam');
+                display.textContent = "00:00";
+                // router('exam/list-exam');
+                clearInterval(cd);
+                clearInterval(countdown);
+                localStorage.removeItem('endTime');
             });
             return;
         }
-
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
-
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
         display.textContent = minutes + ":" + seconds;
         timer--;
     }, 1000);

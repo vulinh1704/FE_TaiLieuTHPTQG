@@ -20,7 +20,7 @@ async function showDetailResult(id) {
                                  <label for="rate"><span style="font-weight: 700">Duration:</span> ${exam.rate} minute</label>
                               </div>
                               <div class="form-group">
-                                 <label for="type"><span style="font-weight: 700">Level:</span> ${exam.type}</label>
+                                 <label for="type"><span style="font-weight: 700">Level:</span> ${exam.type === "easy" ? "Dễ" : (exam.type === "medium" ? "Trung Bình" : "Khó")}</label>
                               </div>
                               <div class="form-group">
                                  <label for="timeAt"><span style="font-weight: 700">Time at:</span> ${new Date(exam.timeAt).toLocaleDateString('en-us', {
@@ -66,11 +66,12 @@ async function showDetailResult(id) {
                                                      <label for="rate">Content: ${exam.questions[i].content}</label>
                                                  </div>
                                                  <div class="col-12">
-                                                     <label for="rate">Level: ${exam.questions[i].level}</label>
+                                                     <label for="rate">Level: ${exam.questions[i].level === "easy" ? "Dễ" : (exam.questions[i].level === "medium" ? "Trung Bình" : "Khó")}</label>
                                                  </div>
-                                                 <div class="col">
-                                                    <label for="rate">Type: ${exam.questions[i].type.name}</label>
+                                                 <div class="col-12">
+                                                    <label for="rate">Type: ${exam.questions[i].type.id === 1 ? "Nhiều đáp án" : (exam.questions[i].type.id === 2 ? "Một đáp án" : "Tự luận")}</label>
                                                  </div>
+                                                 <div class="col-12" id="div-question-${i}"></div>
                                              </div>
                                             <div id="answers-${i}" class="form-group">
                                                  
@@ -131,7 +132,7 @@ async function showDetailResult(id) {
         for (let j = 0; j < result.resultAnswers.length; j++) {
             if(result.resultAnswers[j].question.id === exam.questions[i].id) {
                 if(exam.questions[i].type.id === 2 || exam.questions[i].type.id === 1) {
-                    if (result.resultAnswers[i].isTrue) {
+                    if (result.resultAnswers[j].isTrue) {
                         htmlResult += `
                             <div class="mt-1 ml-2" style="width: 90%">
                                    <label style="width: 100%"><i class="fa-solid fa-circle-check mr-1" style="color: darkgreen"></i> ${result.resultAnswers[j].answer.content}</label>
@@ -149,17 +150,23 @@ async function showDetailResult(id) {
         }
         document.getElementById(`answers-${i}`).innerHTML = htmlInner;
         document.getElementById(`result-${i}`).innerHTML = htmlResult;
+        if(exam.questions[i].image) {
+            document.getElementById(`div-question-${i}`).innerHTML = `<img style="width: 200px; height: 200px"  src="${exam.questions[i].image}"/>`
+        }
     }
 }
 
 async function removeExamResult(id) {
-    let dataToken = JSON.parse(localStorage.getItem("auth"));
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${dataToken.token}`
-    };
-    await axios.delete('http://localhost:3000/resultExams/' + id, {headers});
-    await showListResultExam();
+    let isConfirm = confirm("Bạn có chắc chắn muốn xóa kết quả này?")
+    if(isConfirm) {
+        let dataToken = JSON.parse(localStorage.getItem("auth"));
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${dataToken.token}`
+        };
+        await axios.delete('http://localhost:3000/resultExams/' + id, {headers});
+        await showListResultExam();
+    }
 }
 
 async function getDataDetailResult(id) {

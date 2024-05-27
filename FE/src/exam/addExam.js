@@ -28,9 +28,9 @@ async function showFormAddExam() {
                                  <label for="type-exam">Level</label>
                                  <select class="form-control" id="type-exam">
                                     <option selected="" disabled="">Select Level</option>
-                                    <option value="easy">Easy</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="difficult">Difficult</option>
+                                    <option value="easy">Dễ</option>
+                                    <option value="medium">Trung bình</option>
+                                    <option value="difficult">Khó</option>
                                  </select>
                               </div>
                               <div class="form-group">
@@ -68,7 +68,8 @@ async function showFormAddExam() {
         "subject": {},
         "timeAt": "",
         "questions": [],
-        "type": ""
+        "type": "",
+        "image": ""
     };
     localStorage.setItem("newExam", JSON.stringify(exam));
 }
@@ -98,20 +99,28 @@ function addQuestion() {
                                                  <div class="form-group col">
                                                      <select class="form-control" id="level-question-${keyQuestion}">
                                                         <option selected="" disabled="">Select Level</option>
-                                                        <option value="easy">Easy</option>
-                                                        <option value="medium">Medium</option>
-                                                        <option value="difficult">Difficult</option>
+                                                        <option value="easy">Dễ</option>
+                                                        <option value="medium">Trung Bình</option>
+                                                        <option value="difficult">Khó</option>
                                                      </select>
                                                   </div>
                                                  <div class="col">
                                                      <select class="form-control" id="type-${keyQuestion}" onchange="selectType(event, ${keyQuestion})">
                                                         <option selected="" disabled="">Type</option>
-                                                        <option value="1">Multiple Choice</option>
-                                                        <option value="2">Single Choice</option>
-                                                        <option value="3">Essay</option>
+                                                        <option value="1">Nhiêu đáp án</option>
+                                                        <option value="2">Một đáp án</option>
+                                                        <option value="3">Tự luận</option>
                                                      </select>
                                                  </div>
+                                                 <div class="col">
+                                                    <div class="form-group">
+                                                         <input type="file" class="form-control-file" id="exampleFormControlFile1" onchange="uploadQuestion(event, ${keyQuestion})">
+                                                      </div>
+                                                    </div>
                                               </div>
+                                        <div>
+                                            <img style="width: 200px; height: 200px; display: none" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%2Fimages%3Fk%3Ddefault%2Bimage&psig=AOvVaw11jw-yX7Ztd2J7EFgewYy6&ust=1716883122171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi_vZaurYYDFQAAAAAdAAAAABAE" id="image-question-${keyQuestion}"/>
+                                        </div>
                                         <div id="answers-${keyQuestion}">
                                              
                                         </div>
@@ -152,9 +161,12 @@ function selectType(event, keyQuestion) {
     if (value === "3") {
         document.getElementById(`btn-type-${keyQuestion}`).innerHTML = ``
         document.getElementById(`answers-${keyQuestion}`).innerHTML = ``
+        let newExam = JSON.parse(localStorage.getItem("newExam"));
+        newExam.questions[keyQuestion].answers.push({});
+        localStorage.setItem("newExam", JSON.stringify(newExam));
     }
-
 }
+
 
 function createInputSingleChoice(keyQuestion) {
     keyQuestion = +keyQuestion;
@@ -194,6 +206,7 @@ function addExam() {
     let newExam = JSON.parse(localStorage.getItem("newExam"));
     for (let i = 0; i < newExam.questions.length; i++) {
         newExam.questions[i].type = document.getElementById(`type-${i}`).value;
+        console.log(newExam.questions[i].type === "3")
         if (newExam.questions[i].type !== "3") {
             newExam.questions[i].content = document.getElementById(`content-question-${i}`).value;
             newExam.questions[i].level = document.getElementById(`level-question-${i}`).value;
@@ -202,8 +215,14 @@ function addExam() {
                 newExam.questions[i].answers[j].isTrue = arrBoolean[j].checked;
                 newExam.questions[i].answers[j].content = document.getElementById(`answer-${i}.${j}`).value;
             }
+        } else {
+            newExam.questions[i].content = document.getElementById(`content-question-${i}`).value;
+            newExam.questions[i].level = document.getElementById(`level-question-${i}`).value;
+            delete newExam.questions[i].answers;
         }
+        if(document.getElementById('image-question-' + i).src !== "https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%2Fimages%3Fk%3Ddefault%2Bimage&psig=AOvVaw11jw-yX7Ztd2J7EFgewYy6&ust=1716883122171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi_vZaurYYDFQAAAAAdAAAAABAE") newExam.questions[i].image = document.getElementById('image-question-' + i).src;
     }
+
     newExam.title = document.getElementById("title").value;
     newExam.rate = document.getElementById("rate").value;
     newExam.subject.id = document.getElementById("subject").value;

@@ -28,9 +28,9 @@ async function showListExam() {
                                   <div class="form-group" style="width: 95%">
                                      <select class="form-control" id="level" onchange="showDataTable()">
                                         <option selected="" value="">All Level</option>
-                                        <option value="easy">Easy</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="difficult">Difficult</option>
+                                        <option value="easy">Dễ</option>
+                                        <option value="medium">Trung Bình</option>
+                                        <option value="difficult">Khó</option>
                                      </select>
                                 </div>
                               </div>
@@ -117,7 +117,6 @@ function addExamCustom() {
     let type = document.getElementById("idType").value;
     let quantityQuestion = document.getElementById("quantityQuestion").value;
     let timeAt = new Date();
-    console.log(title)
     let exam = {
         title: title,
         rate: rate,
@@ -159,7 +158,7 @@ async function showListExamCustomUser() {
                            <div class="d-flex justify-content-start mt-3">
                              <div style="padding: 0 2%"><i class="fa-solid fa-circle-question" style="margin-right: 6px"></i>${listExam[i].questions.length} questions</div>
                              <div style="padding: 0 2%"><i class="fa-solid fa-stopwatch" style="margin-right: 6px"></i></i>${listExam[i].rate} minute</div>
-                             <div style="padding: 0 2%; min-width: 10%"><i class="fa-solid fa-star" style="margin-right: 6px"></i>${listExam[i].type}</div>
+                             <div style="padding: 0 2%; min-width: 10%"><i class="fa-solid fa-star" style="margin-right: 6px"></i>${listExam[i].type === "easy" ? "Dễ" : (listExam[i].type === "medium" ? "Trung Bình" : "Khó")}</div>
                              <div style="padding: 0 2%"><i class="fa-solid fa-book" style="margin-right: 6px"></i>${listExam[i].subject.name}</div>
                            </div>
                         </div>
@@ -186,7 +185,7 @@ async function showListExamUser() {
                            <div class="d-flex justify-content-start mt-3">
                              <div style="padding: 0 2%"><i class="fa-solid fa-circle-question" style="margin-right: 6px"></i>${listExam[i].questions.length} questions</div>
                              <div style="padding: 0 2%"><i class="fa-solid fa-stopwatch" style="margin-right: 6px"></i></i>${listExam[i].rate} minute</div>
-                             <div style="padding: 0 2%; min-width: 10%"><i class="fa-solid fa-star" style="margin-right: 6px"></i>${listExam[i].type}</div>
+                             <div style="padding: 0 2%; min-width: 10%"><i class="fa-solid fa-star" style="margin-right: 6px"></i>${listExam[i].type === "easy" ? "Dễ" : (listExam[i].type === "medium" ? "Trung Bình" : "Khó")}</div>
                              <div style="padding: 0 2%"><i class="fa-solid fa-book" style="margin-right: 6px"></i>${listExam[i].subject.name}</div>
                            </div>
                         </div>
@@ -233,7 +232,7 @@ async function showDataTable() {
                                     <td class="text-center">${i + 1}</td>
                                     <td>${listExam[i].title}</td>
                                     <td>${listExam[i].rate}</td>
-                                    <td>${listExam[i].type}</td>
+                                    <td>${listExam[i].type === "easy" ? "Dễ" : (listExam[i].type === "medium" ? "Trung Bình" : "Khó")}</td>
                                     <td>${new Date(listExam[i].timeAt).toLocaleDateString('en-us', {
             weekday: "long",
             year: "numeric",

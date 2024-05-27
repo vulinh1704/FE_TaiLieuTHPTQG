@@ -36,6 +36,11 @@ function router(currentPage = localStorage.getItem("currentPage")) {
                 } else if (currentPage.includes("change-password")) {
                     showFormChangePassWord();
                 }
+            } else if (currentPage.includes("subjectss")) {
+                document.getElementById("subjectss").classList.add("active");
+                if (currentPage.includes("list-subjects")) {
+                    showListSubjects();
+                }
             }
             if (oldPage !== "idResultExam") {
                 document.getElementById(oldPage.split('/')[0]).classList.remove("active-menu");

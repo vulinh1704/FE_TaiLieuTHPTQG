@@ -29,9 +29,9 @@ async function showFormEditExam(id) {
                                  <label for="type-exam">Level</label>
                                  <select class="form-control" id="type-exam">
                                     <option selected="" disabled="">Select Level</option>
-                                    <option value="easy">Easy</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="difficult">Difficult</option>
+                                    <option value="easy">Dễ</option>
+                                    <option value="medium">Trung bình</option>
+                                    <option value="difficult">Khó</option>
                                  </select>
                               </div>
                               <div class="form-group">
@@ -89,20 +89,28 @@ function showOldQuestion(questions) {
                                                  <div class="form-group col">
                                                      <select class="form-control" id="level-question-${keyQuestion}">
                                                         <option selected="" disabled="">Select Level</option>
-                                                        <option value="easy">Easy</option>
-                                                        <option value="medium">Medium</option>
-                                                        <option value="difficult">Difficult</option>
+                                                        <option value="easy">Dễ</option>
+                                                        <option value="medium">Trung bình</option>
+                                                        <option value="difficult">Khó</option>
                                                      </select>
                                                   </div>
                                                  <div class="col">
                                                      <select class="form-control" id="type-${keyQuestion}" onchange="selectType(event, ${keyQuestion})">
                                                         <option selected="" disabled="">Type</option>
-                                                        <option value="1">Multiple Choice</option>
-                                                        <option value="2">Single Choice</option>
-                                                        <option value="3">Essay</option>
+                                                        <option value="1">Nhiều đáp án</option>
+                                                        <option value="2">Một đáp án</option>
+                                                        <option value="3">Tự luận</option>
                                                      </select>
                                                  </div>
+                                                 <div class="col">
+                                                    <div class="form-group">
+                                                         <input type="file" class="form-control-file" id="exampleFormControlFile1" onchange="uploadQuestion(event, ${keyQuestion})">
+                                                      </div>
+                                                    </div>
                                               </div>
+                                        <div id="${"div-image-question-" + keyQuestion}">
+                                            <img style="width: 200px; height: 200px" src="${questions[keyQuestion].image ? questions[keyQuestion].image : 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%2Fimages%3Fk%3Ddefault%2Bimage&psig=AOvVaw11jw-yX7Ztd2J7EFgewYy6&ust=1716883122171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi_vZaurYYDFQAAAAAdAAAAABAE'}" id="image-question-${keyQuestion}"/>
+                                        </div>
                                         <div id="answers-${keyQuestion}">
                                              
                                         </div>
@@ -114,6 +122,9 @@ function showOldQuestion(questions) {
     `;
         let answersDiv = document.getElementById("questions");
         answersDiv.appendChild(newDiv);
+        if (document.getElementById('image-question-' + keyQuestion).src === 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%2Fimages%3Fk%3Ddefault%2Bimage&psig=AOvVaw11jw-yX7Ztd2J7EFgewYy6&ust=1716883122171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi_vZaurYYDFQAAAAAdAAAAABAE') {
+            document.getElementById('div-image-question-' + keyQuestion).style.display = "none";
+        }
         document.getElementById(`type-${keyQuestion}`).value = questions[keyQuestion].type.id;
         document.getElementById(`level-question-${keyQuestion}`).value = questions[keyQuestion].level;
         document.getElementById(`answers-${keyQuestion}`).innerHTML = `<p class="card-title ml-2 mt-2">Answer...</p>`;
@@ -121,14 +132,22 @@ function showOldQuestion(questions) {
             if (questions[keyQuestion].type.id === 1) {
                 document.getElementById(`btn-type-${keyQuestion}`).innerHTML = `<div class="card-title ml-2 text-primary" style="font-size: 20px;" onclick="createInputMultipleChoice(${keyQuestion})"> + </div>`
                 let newDiv = document.createElement("div");
-                newDiv.innerHTML = `
+                if (questions[keyQuestion].answers[keyAnswer].isTrue) {
+                    newDiv.innerHTML = `
                     <div class="custom-control custom-checkbox ml-2 mt-2" style="width: 90%">
-                          <input type="checkbox" name="is-true-${keyQuestion}" class="custom-control-input" id="is-true-${keyQuestion}.${keyAnswer}" checked="${questions[keyQuestion].answers[keyAnswer].isTrue}">
+                          <input type="checkbox" name="is-true-${keyQuestion}" class="custom-control-input" id="is-true-${keyQuestion}.${keyAnswer}" checked="">
                           <label class="custom-control-label" style="width: 100%" for="is-true-${keyQuestion}.${keyAnswer}"> <input type="text" class="form-control" value="${questions[keyQuestion].answers[keyAnswer].content}" id="answer-${keyQuestion}.${keyAnswer}" placeholder="Answer ${keyAnswer + 1}" ></label>
                     </div>
                     `;
+                } else {
+                    newDiv.innerHTML = `
+                    <div class="custom-control custom-checkbox ml-2 mt-2" style="width: 90%">
+                          <input type="checkbox" name="is-true-${keyQuestion}" class="custom-control-input" id="is-true-${keyQuestion}.${keyAnswer}">
+                          <label class="custom-control-label" style="width: 100%" for="is-true-${keyQuestion}.${keyAnswer}"> <input type="text" class="form-control" value="${questions[keyQuestion].answers[keyAnswer].content}" id="answer-${keyQuestion}.${keyAnswer}" placeholder="Answer ${keyAnswer + 1}" ></label>
+                    </div>
+                    `;
+                }
                 let answersDiv = document.getElementById(`answers-${keyQuestion}`);
-                console.log(newDiv)
                 answersDiv.appendChild(newDiv);
             }
 

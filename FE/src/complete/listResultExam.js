@@ -46,9 +46,14 @@ async function showDataResultExam() {
                            <div class="d-flex justify-content-start mt-3">
                              <div style="padding: 0 2%"><i class="fa-solid fa-circle-question" style="margin-right: 6px"></i>${data[i].exam.questions.length} questions</div>
                              <div style="padding: 0 2%"><i class="fa-solid fa-stopwatch" style="margin-right: 6px"></i></i>${data[i].exam.rate} minute</div>
-                             <div style="padding: 0 2%; min-width: 10%"><i class="fa-solid fa-star" style="margin-right: 6px"></i>${data[i].exam.type}</div>
+                             <div style="padding: 0 2%; min-width: 10%"><i class="fa-solid fa-star" style="margin-right: 6px"></i>${data[i].exam.type === "easy" ? "Dễ" : (data[i].exam.type === "medium" ? "Trung Bình" : "Khó")}</div>
                              <div style="padding: 0 2%"><i class="fa-solid fa-book" style="margin-right: 6px"></i>${data[i].exam.subject.name}</div>
-                             <div style="padding: 0 2%"><i class="fa-solid fa-circle-check" style="margin-right: 6px"></i>${new Date(data[i].timeAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}</div>
+                             <div style="padding: 0 2%"><i class="fa-solid fa-circle-check" style="margin-right: 6px"></i>${new Date(data[i].timeAt).toLocaleDateString('en-us', {
+            weekday: "long",
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        })}</div>
                            </div>
                         </div>
                      </div>

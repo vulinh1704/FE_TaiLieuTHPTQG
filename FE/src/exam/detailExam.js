@@ -19,15 +19,15 @@ async function showDetailExam(id) {
                                  <label for="rate">Duration: ${exam.rate} minute</label>
                               </div>
                               <div class="form-group">
-                                 <label for="type">Level: ${exam.type}</label>
+                                 <label for="type">Level: ${exam.type === "easy" ? "Dễ" : (exam.type === "medium" ? "Trung Bình" : "Khó")}</label>
                               </div>
                               <div class="form-group">
                                  <label for="timeAt">Time at: ${new Date(exam.timeAt).toLocaleDateString('en-us', {
-                                        weekday: "long",
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric"
-                                    })}</label>
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    })}</label>
                               </div>
                               <div class="form-group">
                                  <label for="subject">Subject: ${exam.subject.name}</label>
@@ -60,11 +60,15 @@ async function showDetailExam(id) {
                                                 <div class="col-12">
                                                      <label for="rate">Content: ${exam.questions[i].content}</label>
                                                  </div>
+                                                 <div class="col-12" id="${'image-question-' + i}" style="display: none">
+                                                     <label for="aa"></label>
+                                                 </div>
                                                  <div class="col-12">
-                                                     <label for="rate">Level: ${exam.questions[i].level}</label>
+                                                     <label for="rate">Level: ${exam.questions[i].type === "easy" ? "Dễ" : (exam.questions[i].type === "medium" ? "Trung Bình" : "Khó")}</label>
                                                  </div>
                                                  <div class="col">
-                                                    <label for="rate">Type: ${exam.questions[i].type.name}</label>
+                                                    <label for="rate">Type: ${exam.questions[i].type.id === 1 ? "Nhiều đáp án" : (exam.questions[i].type.id === 2 ? "Một đáp án" : "Tự luận")}</label>
+                                                 
                                                  </div>
                                               </div>
                                         <div id="answers-${i}" class="form-group">
@@ -78,6 +82,12 @@ async function showDetailExam(id) {
         `
     }
     document.getElementById("questions").innerHTML = html;
+    for (let i = 0; i < exam.questions.length; i++) {
+        if (exam.questions[i].image) {
+            document.getElementById('image-question-' + i).style.display = "block";
+            document.getElementById('image-question-' + i).innerHTML = `<img src="${exam.questions[i].image}" style="width: 200px; height: 200px;" alt=""/>`;
+        }
+    }
     for (let i = 0; i < exam.questions.length; i++) {
         let htmlInner = ``
         for (let j = 0; j < exam.questions[i].answers.length; j++) {
