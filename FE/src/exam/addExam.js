@@ -119,7 +119,7 @@ function addQuestion() {
                                                     </div>
                                               </div>
                                         <div>
-                                            <img style="width: 200px; height: 200px; display: none" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%2Fimages%3Fk%3Ddefault%2Bimage&psig=AOvVaw11jw-yX7Ztd2J7EFgewYy6&ust=1716883122171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi_vZaurYYDFQAAAAAdAAAAABAE" id="image-question-${keyQuestion}"/>
+                                            <img style="max-width: 500px; max-height: 50%; display: none; object-fit: contain" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%2Fimages%3Fk%3Ddefault%2Bimage&psig=AOvVaw11jw-yX7Ztd2J7EFgewYy6&ust=1716883122171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi_vZaurYYDFQAAAAAdAAAAABAE" id="image-question-${keyQuestion}"/>
                                         </div>
                                         <div id="answers-${keyQuestion}">
                                              
