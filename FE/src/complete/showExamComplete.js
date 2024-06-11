@@ -94,7 +94,7 @@ async function showCompleteExam(idCurrentExam = localStorage.getItem("idCurrentE
         if(exam.questions[i].type.id === 3) {
             htmlAnswers += `
                     <div class="form-group">
-                           <textarea class="form-control" id="answer-${i}" rows="5" placeholder="Nhập câu trả lời..."></textarea>
+                           <textarea class="form-control"  id="answer-${i}" rows="5" placeholder="Nhập câu trả lời...">${''}</textarea>
                     </div>
                     `
         }
@@ -257,6 +257,16 @@ async function handleSubmit(idCurrentExam) {
 
 
 function checkIsComplete(index) {
+    let checkText = document.getElementById(`answer-${index}`);
+    if(checkText && checkText.value !== '') {
+        document.getElementById(`btn-${index}`).classList.remove("btn-outline-primary");
+        document.getElementById(`btn-${index}`).classList.add("btn-primary");
+        return;
+    } else  {
+        document.getElementById(`btn-${index}`).classList.add("btn-outline-primary");
+        document.getElementById(`btn-${index}`).classList.remove("btn-primary");
+    }
+
     let isTrue = false;
     let arr = Array.from(document.getElementsByName(`answers-${index}`));
     for (let i = 0; i < arr.length; i++) {
