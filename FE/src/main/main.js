@@ -183,10 +183,10 @@ async function showNavbar() {
                         </div>
                     </div>
                     <div class="iq-search-bar">
-<!--                        <form action="#" class="searchbox">-->
-<!--                            <input type="text" class="text search-input" placeholder="Type here to search...">-->
-<!--                            <a class="search-link" href="#"><i class="ri-search-line"></i></a>-->
-<!--                        </form>-->
+                        <div class="searchbox">
+                            <input type="text" class="text search-input" id="search-blog" placeholder="Type here to search..." value="">
+                            <a class="search-link" onclick="showAll(document.getElementById('search-blog').value)"><i class="ri-search-line"></i></a>
+                        </div>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
                         <i class="ri-menu-3-line"></i>

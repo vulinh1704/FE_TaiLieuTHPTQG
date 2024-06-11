@@ -91,6 +91,13 @@ async function showCompleteExam(idCurrentExam = localStorage.getItem("idCurrentE
                     </div>`
             }
         }
+        if(exam.questions[i].type.id === 3) {
+            htmlAnswers += `
+                    <div class="form-group">
+                           <textarea class="form-control" id="answer-${i}" rows="5" placeholder="Nhập câu trả lời..."></textarea>
+                    </div>
+                    `
+        }
         if (i === 0 && i !== exam.questions.length - 1) {
             htmlAnswers += `<button name="next" class="btn btn-primary next float-right" value="Next" onClick="handNextQuestion(${i})">Next</button>`;
         } else if (i > 0 && i < exam.questions.length - 1) {
@@ -185,6 +192,15 @@ async function handleSubmit(idCurrentExam) {
     let exam = await getDetailExam(idCurrentExam);
     let resultAnswers = [];
     for (let i = 0; i < exam.questions.length; i++) {
+        if(exam.questions[i].type.id === 3) {
+            let a = {
+                question: {id: exam.questions[i].id},
+                resultExam: {id: localStorage.getItem("idResultExam")},
+                content: document.getElementById(`answer-${i}`).value
+            };
+            resultAnswers.push(a);
+        }
+
         let arrBoolean = Array.from(document.querySelectorAll(`input[name="answers-${i}"]`))
         for (let j = 0; j < exam.questions[i].answers.length; j++) {
             let a = {

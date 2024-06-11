@@ -49,7 +49,7 @@ async function showFormEditExam(id) {
                                     <div onclick="addQuestion()"><i class="fa-regular fa-square-plus"></i></div>
                                  </div>
                               </div>
-                              <button type="submit" class="btn btn-primary" onclick="addExam()">Submit</button>
+                              <button type="submit" class="btn btn-primary" onclick="confirm('Bạn có chắc chắn muốn sửa bài thi này?') ? addExam() : ''">Submit</button>
                               <button type="submit" class="btn btn-primary" onclick="showListExam()">Back List Exam</button>
                            </div>
                         </div>

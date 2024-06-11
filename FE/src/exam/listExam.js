@@ -275,7 +275,10 @@ async function getListExam() {
 }
 
 function removeExam(id) {
-    axios.delete('http://localhost:3000/exams/' + id).then(() => {
-        showListExam()
-    })
+    let isConfirm = confirm("Bạn có chắc muốn xóa bài thi này?")
+    if (isConfirm) {
+        axios.delete('http://localhost:3000/exams/' + id).then(() => {
+            showListExam()
+        })
+    }
 }

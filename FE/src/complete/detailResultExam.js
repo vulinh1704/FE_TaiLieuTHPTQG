@@ -145,6 +145,12 @@ async function showDetailResult(id) {
                             </div>
                         `
                     }
+                } else {
+                    htmlResult += `
+                            <div class="mt-1 ml-2" style="width: 90%">
+                              <label style="width: 100%">${result.resultAnswers[j].content}</label>
+                            </div>
+                        `
                 }
             }
         }

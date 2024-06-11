@@ -1,10 +1,10 @@
-function showAll() {
+function showAll(keyword = "") {
     let auth = JSON.parse(localStorage.getItem("auth"));
     if(auth && auth.role === "USER") {
         showAllInUser();
         return;
     }
-    axios.get("http://localhost:3000/news").then(({data}) => {
+    axios.get("http://localhost:3000/news?keyword="+keyword).then(({data}) => {
         if(data.length) {
             let html = `<div class="row">`;
             for (let i = 0; i < data.length; i++) {
