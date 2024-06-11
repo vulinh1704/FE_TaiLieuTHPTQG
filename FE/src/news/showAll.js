@@ -1,11 +1,11 @@
 function showAll(keyword = "") {
     let auth = JSON.parse(localStorage.getItem("auth"));
-    if(auth && auth.role === "USER") {
-        showAllInUser();
+    if (auth && auth.role === "USER") {
+        showAllInUser(keyword);
         return;
     }
-    axios.get("http://localhost:3000/news?keyword="+keyword).then(({data}) => {
-        if(data.length) {
+    axios.get("http://localhost:3000/news?keyword=" + keyword).then(({data}) => {
+        if (data.length) {
             let html = `<div class="row">`;
             for (let i = 0; i < data.length; i++) {
                 html += `
@@ -14,7 +14,12 @@ function showAll(keyword = "") {
                             <div class="iq-card-header d-flex justify-content-between">
                                 <div class="iq-header-title mt-2">
                                     <h4 class="card-title">${data[i].title}</h4>
-                                    <span>${new Date(data[i].timeAt).toLocaleDateString('en-us', {weekday: "long", year: "numeric", month: "short", day: "numeric"})}</span>
+                                    <span>${new Date(data[i].timeAt).toLocaleDateString('en-us', {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric"
+                })}</span>
                                 </div>
                             </div>
                             <div class="iq-card-body">
@@ -48,9 +53,9 @@ function showAll(keyword = "") {
     });
 }
 
-function showAllInUser() {
-    axios.get("http://localhost:3000/news").then(({data}) => {
-        if(data.length) {
+function showAllInUser(keyword = "") {
+    axios.get("http://localhost:3000/news?keyword=" + keyword).then(({data}) => {
+        if (data.length) {
             let html = `
             <div class="row">
             <div class="col-lg-12 " style="font-size: 16px; text-align: justify">
@@ -75,7 +80,12 @@ function showAllInUser() {
                             <div class="iq-card-header d-flex justify-content-between">
                                 <div class="iq-header-title mt-2">
                                     <h4 class="card-title">${data[i].title}</h4>
-                                    <span>${new Date(data[i].timeAt).toLocaleDateString('en-us', {weekday: "long", year: "numeric", month: "short", day: "numeric"})}</span>
+                                    <span>${new Date(data[i].timeAt).toLocaleDateString('en-us', {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric"
+                })}</span>
                                 </div>
                             </div>
                             <div class="iq-card-body">
